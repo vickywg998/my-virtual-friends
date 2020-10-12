@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { myBuddy } from "../../types/friend";
+import { IFriend } from "../../types/friend";
 import Friend from "../../models/friend";
 
 const getFriends = async (req: Request, res: Response): Promise<void> => {
   try {
-    const friends: myBuddy[] = await Friend.find();
+    const friends: IFriend[] = await Friend.find();
     res.status(200).json({ friends });
   } catch (error) {
     throw error;
@@ -13,9 +13,9 @@ const getFriends = async (req: Request, res: Response): Promise<void> => {
 
 const addFriend = async (req: Request, res: Response): Promise<void> => {
   try {
-    const body = req.body as Pick<myBuddy, "name" | "gender"| "age" | "hobbies" | "music_genre" | "pets" |  "status">;
+    const body = req.body as Pick<IFriend, "name" | "gender"| "age" | "hobbies" | "music_genre" | "pets" |  "status">;
 
-    const friend: myBuddy = new Friend({
+    const friend: IFriend = new Friend({
       name: body.name,
       gender: body.gender,
       age: body.age,
@@ -25,8 +25,8 @@ const addFriend = async (req: Request, res: Response): Promise<void> => {
       status: body.status,
     });
 
-    const newFriend: myBuddy = await friend.save();
-    const allFriends: myBuddy[] = await Friend.find();
+    const newFriend: IFriend = await friend.save();
+    const allFriends: IFriend[] = await Friend.find();
 
     res
       .status(201)
@@ -47,11 +47,11 @@ const updateFriend = async (req: Request, res: Response): Promise<void> => {
       params: { id },
       body,
     } = req;
-    const updateFriend: myBuddy | null = await Friend.findByIdAndUpdate(
+    const updateFriend: IFriend | null = await Friend.findByIdAndUpdate(
       { _id: id },
       body
     );
-    const allFriends: myBuddy[] = await Friend.find();
+    const allFriends: IFriend[] = await Friend.find();
     res.status(200).json({
       message: "Friend updated",
       friend: updateFriend,
@@ -64,10 +64,10 @@ const updateFriend = async (req: Request, res: Response): Promise<void> => {
 
 const deleteFriend = async (req: Request, res: Response): Promise<void> => {
   try {
-    const deletedFriend: myBuddy | null = await Friend.findByIdAndRemove(
+    const deletedFriend: IFriend | null = await Friend.findByIdAndRemove(
       req.params.id
     );
-    const allFriends: myBuddy[] = await Friend.find();
+    const allFriends: IFriend[] = await Friend.find();
     res.status(200).json({
       message: "friend deleted",
       friend: deletedFriend,

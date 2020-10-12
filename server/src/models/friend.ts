@@ -1,4 +1,4 @@
-import { myBuddy } from "../types/friend";
+import {IFriend } from "../types/friend";
 import { model, Schema } from "mongoose";
 
 const friendSchema: Schema = new Schema(
@@ -23,7 +23,7 @@ const friendSchema: Schema = new Schema(
       type: String,
       required: true,
     },
-    pet: {
+    pets: {
       type: String,
       required: false,
     },
@@ -31,4 +31,4 @@ const friendSchema: Schema = new Schema(
   { timestamps: true }
 );
 
-export default model<myBuddy>("Friend", friendSchema);
+export default model<IFriend>("Friend", friendSchema);

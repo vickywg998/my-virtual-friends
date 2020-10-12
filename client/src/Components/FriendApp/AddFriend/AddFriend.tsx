@@ -1,11 +1,31 @@
 import React, { useState } from "react";
+import styled from "styled-components";
+
+const AddFriendButton = styled.button`
+  background: #ff9900;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  border: none;
+  margin-top: 1em;
+
+  &:hover {
+    text-decoration: none;
+    background-color: white;
+    color: #ff9900;
+    border: 2px solid #ff9900;
+  }
+`;
 
 type Props = {
-  saveFriend: (e: React.FormEvent, formData: myBuddy | any) => void;
+  saveFriend: (e: React.FormEvent, formData: IFriend| any) => void;
 };
 
+
+
 const AddFriend: React.FC<Props> = ({ saveFriend }) => {
-  const [formData, setFormData] = useState<myBuddy | {}>();
+  const [formData, setFormData] = useState<IFriend | {}>();
 
   const handleFormOnChange = (
     e: React.FormEvent<HTMLInputElement | HTMLSelectElement>
@@ -27,7 +47,7 @@ const AddFriend: React.FC<Props> = ({ saveFriend }) => {
           <label htmlFor="gender">Gender</label>
 
           <select onChange={handleFormOnChange} id="gender">
-          <option disabled selected value=""> -- select an option -- </option>
+          <option disabled defaultValue="true" value=""> -- select an option -- </option>
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="prefernottosay">Prefer not to say</option>
@@ -47,7 +67,7 @@ const AddFriend: React.FC<Props> = ({ saveFriend }) => {
         <div>
           <label htmlFor="hobbies">Hobbies</label>
           <select onChange={handleFormOnChange} id="hobbies">
-          <option disabled selected value=""> -- select an option -- </option>
+          <option disabled defaultValue="true" value=""> -- select an option -- </option>
             <optgroup label="Active & Outdoor Hobbies">
               <option value="hiking">hiking</option>
               <option value="basketball">basketball</option>
@@ -88,10 +108,11 @@ const AddFriend: React.FC<Props> = ({ saveFriend }) => {
           <label htmlFor="pets">Pets</label>
           <input onChange={handleFormOnChange} type="text" id="pets" />
         </div>
+     
       </div>
-      <button disabled={formData === undefined ? true : false}>
+      <AddFriendButton disabled={formData === undefined ? true : false}>
         Add Friend
-      </button>
+      </AddFriendButton>
     </form>
   );
 };

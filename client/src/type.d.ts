@@ -1,4 +1,4 @@
-interface myBuddy {
+interface IFriend {
 _id: string
 name: string
 gender: string
@@ -13,12 +13,12 @@ updatedAt?: string
 }
 
 interface FriendProps {
-    friend: myBuddy
+    friend: IFriend
 }
 
 type ApiDataType = {
     message: string
     status: string
-    friends: myBuddy[]
-    friend?: myBuddy
+    friends:IFriend[]
+    friend?: IFriend
 }

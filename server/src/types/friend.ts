@@ -1,6 +1,6 @@
 import { Document } from "mongoose"
 
-export interface myBuddy extends Document {
+export interface IFriend extends Document {
   name: string
   gender: string
   age: number

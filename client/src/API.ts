@@ -14,17 +14,17 @@ export const getFriends = async (): Promise<AxiosResponse<ApiDataType>> => {
 };
 
 export const addFriend = async (
-    formData: myBuddy
+    formData: IFriend
   ): Promise<AxiosResponse<ApiDataType>> => {
     try {
-      const friend: Omit<myBuddy, '_id'> = {
+      const friend: Omit<IFriend, '_id'> = {
         name: formData.name,
         gender: formData.gender,
         age: formData.age,
         hobbies: formData.hobbies,
         music_genre: formData.music_genre,
         pets: formData.pets,
-        status: false,
+        status: true,
       }
       const saveFriend: AxiosResponse<ApiDataType> = await axios.post(
         baseUrl + '/add',
@@ -37,14 +37,23 @@ export const addFriend = async (
   }
 
 
-export const updateFriend = async (friend:myBuddy): Promise<AxiosResponse<ApiDataType>> => {
+export const updateFriend = async (formData:IFriend): Promise<AxiosResponse<ApiDataType>> => {
   try {
-    const friendUpdate: Pick<myBuddy, "status"> = { status: true };
+    const friendUpdate: Pick<IFriend,  "name" | "gender"| "age" | "hobbies" | "music_genre" | "pets" |  "status"> = {
+      name: formData.name,
+      gender: formData.gender,
+      age: formData.age,
+      hobbies: formData.hobbies,
+      music_genre: formData.music_genre,
+      pets: formData.pets,
+      status: true,
+    };
     const updatedFriend: AxiosResponse<ApiDataType> = await axios.put(
-      `${baseUrl}/edit/${friend._id}`,
+      `${baseUrl}/edit/${formData._id}`,
       friendUpdate
+  
     );
-
+    console.log(`${baseUrl}/edit/${formData._id}`)
     return updatedFriend;
   } catch (error) {
     throw new Error(error);
