@@ -3,7 +3,6 @@ import CurrentFriendList from "./CurrentFriendList";
 
 import {
   getFriends,
-  addFriend,
   updateFriend,
   deleteFriend,
 } from "../../../API";
@@ -27,8 +26,8 @@ const AddFriendButton = styled.a`
 `;
 
 const AddFriendTitle = styled.h1`
-text-align: center;
-margin: 1rem 0;
+  text-align: center;
+  margin: 1rem 0;
 `;
 
 const CurrentFriendComponent: React.FC = () => {
@@ -42,18 +41,6 @@ const CurrentFriendComponent: React.FC = () => {
     getFriends()
       .then(({ data: { friends } }: IFriend[] | any) => setFriends(friends))
       .catch((err: Error) => console.log(err));
-  };
-
-  const handleSaveFriend = (e: React.FormEvent, formData: IFriend): void => {
-    e.preventDefault();
-    addFriend(formData)
-      .then(({ status, data }) => {
-        if (status !== 201) {
-          throw new Error("Error! Friend not saved");
-        }
-        setFriends(data.friends);
-      })
-      .catch((err) => console.log(err));
   };
 
   const handleUpdateFriend = (formData: IFriend): void => {
@@ -80,7 +67,7 @@ const CurrentFriendComponent: React.FC = () => {
 
   return (
     <div className="App">
-      <AddFriendTitle >My Friends</AddFriendTitle>
+      <AddFriendTitle>My Friends</AddFriendTitle>
       <AddFriendButton as="a" href="/add">
         Add More!
       </AddFriendButton>

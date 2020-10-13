@@ -14,7 +14,7 @@ const HeroTitleWrapper = styled.section`
   align-items: center;
   justify-content: center;
   flex-flow: column wrap;
-  padding: 15em 10em;
+  padding: 12em 10em;
 `;
 
 const HeroButton = styled.a`
@@ -35,13 +35,11 @@ const HeroButton = styled.a`
   }
 `;
 
-/* ... */
-
 const HeaderImage = styled.div`
-  background: url(${PeopleImage}); no-repeat center
-  background-size: cover;
-  max-width:100%;
-  max-height:100%;
+width: 100%;
+height: 400px;
+background-image: url(${PeopleImage});
+background-size: 100% 100%;
 `;
 
 
