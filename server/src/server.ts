@@ -1,28 +1,45 @@
-
 import * as dotenv from "dotenv";
-import express, { Application} from "express";
+import express, { Application, Request, Response } from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import friendRoutes from "./routes/index";
 import bodyParser from "body-parser";
+import path from "path";
+// file upload dependency
+import {fileRoutes} from "./routes/fileRoutes";
+
+//routes
+import friendRoutes from "./routes/friendsRoutes";
 
 // initialize configuration
 dotenv.config();
 
+
 const router: Application = express();
 const PORT = process.env.SERVER_PORT || 3001;
 
-router.use(bodyParser.urlencoded({ extended: false }));
+router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
-router.use(cors())
-router.use(friendRoutes)
+router.use(cors());
+// router.use((req, res, next) => {
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, Content-Type, X-Requested-With,Accept, Authorization"
+//   );
+//  });
+
+ // for parsing multipart/form-data
+router.use(express.static('public'));
+
+router.use(friendRoutes);
+router.use("/images", fileRoutes);
 
 
-const uri: string = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.ekzcp.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`
-const options = { useNewUrlParser: true, useUnifiedTopology: true }
-mongoose.set("useFindAndModify", false)
+// console.log(path.join(__dirname, "/../uploads/"))
 
+const uri: string = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.ekzcp.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`;
+const options = { useNewUrlParser: true, useUnifiedTopology: true };
+mongoose.set("useFindAndModify", false);
 
 mongoose
   .connect(uri, options)
@@ -31,21 +48,12 @@ mongoose
       console.log(`Server is running on http://localhost:${PORT}`)
     )
   )
-  .catch(error => {
-    throw error
-  })
+  .catch((error) => {
+    throw error;
+  });
 
 
-  // sample routes 
-// router.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type,Accept, Authorization"
-//   );
-
-
-
+// sample routes
 // router.get("/", (req: Request, res: Response, next: NextFunction) => {
 //   res.send("Hello World v2");
 //   res.status(200).json({

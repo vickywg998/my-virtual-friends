@@ -27,6 +27,11 @@ const friendSchema: Schema = new Schema(
       type: String,
       required: false,
     },
+    images: {
+      type: Object,
+      required: false,
+    },
+
   },
   { timestamps: true }
 );

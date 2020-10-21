@@ -13,7 +13,7 @@ const getFriends = async (req: Request, res: Response): Promise<void> => {
 
 const addFriend = async (req: Request, res: Response): Promise<void> => {
   try {
-    const body = req.body as Pick<IFriend, "name" | "gender"| "age" | "hobbies" | "music_genre" | "pets" |  "status">;
+    const body = req.body as Pick<IFriend, "name" | "gender"| "age" | "hobbies" | "music_genre" | "pets" | "images"| "status">;
 
     const friend: IFriend = new Friend({
       name: body.name,
@@ -22,6 +22,7 @@ const addFriend = async (req: Request, res: Response): Promise<void> => {
       hobbies: body.hobbies,
       music_genre: body.music_genre,
       pets: body.pets,
+      images: body.images,
       status: body.status,
     });
 
@@ -38,7 +39,7 @@ const addFriend = async (req: Request, res: Response): Promise<void> => {
   } catch (error) {
     throw error;
   }
-  console.log('function ran')
+  console.log('friend added successfully')
 };
 
 const updateFriend = async (req: Request, res: Response): Promise<void> => {
@@ -78,16 +79,8 @@ const deleteFriend = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
+
+
+
 export { getFriends, addFriend, updateFriend, deleteFriend };
 
-// const register = (req: Request, res: Response, next: NextFunction) => {
-//   res.status(200).json({
-//     message: "register route is working.",
-//   });
-// };
-
-// const deleteUser = (req: Request, res: Response, next: NextFunction) => {
-//   res.status(200).json({
-//     message: "delete route is working.",
-//   });
-// };
