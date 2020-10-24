@@ -1,7 +1,7 @@
 
 # Virtual Friends [WIP]
 
-Currently building a Full Stack project to get myself familiar with TypeScript. Stay tuned. :) 
+Currently building a toy Full Stack project to familiarize myself with TypeScript. Stay tuned. :) 
 
 ## client
 
