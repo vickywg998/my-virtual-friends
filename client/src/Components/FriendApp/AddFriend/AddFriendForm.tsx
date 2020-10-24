@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const AddFriendButton = styled.button`
   background: #ff9900;
@@ -19,12 +21,13 @@ const AddFriendButton = styled.button`
 `;
 
 type Props = {
-  saveFriend: (e: React.FormEvent, formData: IFriend | any) => void;
+  saveFriend: (formData: FormData) => void;
 };
 
-const AddFriend: React.FC<Props> = ({ saveFriend }) => {
-  const [formData, setFormData] = useState<IFriend | {}>();
+const AddFriendForm: React.FC<Props> = ({ saveFriend }) => {
+  const [formData, setFormData] = useState<IAddFriend>({});
   const [added, setAdded] = useState<boolean>(false);
+  const friendImage = useRef<HTMLInputElement>(null);
 
   const handleFormOnChange = (
     e: React.FormEvent<HTMLInputElement | HTMLSelectElement>
@@ -34,9 +37,33 @@ const AddFriend: React.FC<Props> = ({ saveFriend }) => {
       [e.currentTarget.id]: e.currentTarget.value,
     });
   };
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    let image;
+    if (friendImage.current?.files) {
+      image = friendImage.current?.files[0]
+    }
+
+    // todo: get formData from <form> element on submit
+    // ex. const data = new FormData(e.???)
+    const fd = new FormData();
+    fd.append('image', image as Blob);
+    fd.append('name', formData.name || '');
+    fd.append('gender', formData.gender || '');
+    fd.append('age', '' + formData.age);
+    fd.append('hobbies', formData.hobbies || '');
+    fd.append('music_genre', formData.music_genre || '');
+    fd.append('pets', formData.pets || '');
+
+    saveFriend(fd);
+  }
+
   return (
     <>
-      <form className="Form" onSubmit={(e) => saveFriend(e, formData)}>
+      <form className="Form" onSubmit={onSubmit}>
+        <input type="file" id="image" ref={friendImage} onChange={handleFormOnChange}/>
         <div>
           <div>
             <label htmlFor="name">Name</label>
@@ -121,9 +148,18 @@ const AddFriend: React.FC<Props> = ({ saveFriend }) => {
           Add Friend
         </AddFriendButton>
       </form>
-      {added && <h4>Your friend is added!</h4>}
+      {added && (
+        <div>
+          <h4 className="added-notif"> Your friend is added!</h4>
+          <FontAwesomeIcon
+            icon={faTimes}
+            onClick={() => setAdded(false)}
+            size="lg"
+          />
+        </div>
+      )}
     </>
   );
 };
 
-export default AddFriend;
+export default AddFriendForm;

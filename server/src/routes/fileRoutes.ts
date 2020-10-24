@@ -30,7 +30,7 @@ const upload = multer({ storage: storage, fileFilter: fileFilter });
 
 router.post(
   "/",
-  upload.array("images", 5),
+  upload.array("images", 1),
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const body = req.body;

@@ -14,27 +14,46 @@ export const getFriends = async (): Promise<AxiosResponse<ApiDataType>> => {
 };
 
 export const addFriend = async (
-    formData: IFriend
+    formData: FormData,
   ): Promise<AxiosResponse<ApiDataType>> => {
     try {
-      const friend: Omit<IFriend, '_id'> = {
-        name: formData.name,
-        gender: formData.gender,
-        age: formData.age,
-        hobbies: formData.hobbies,
-        music_genre: formData.music_genre,
-        pets: formData.pets,
-        status: true,
-      }
       const saveFriend: AxiosResponse<ApiDataType> = await axios.post(
         baseUrl + '/add',
-       friend
+        formData
       )
       return saveFriend
     } catch (error) {
       throw new Error(error)
     }
   }
+
+  export const uploadFile = async (files: File[]) : Promise<AxiosResponse<ApiDataType>> => {
+    try {
+      const fd = new FormData();
+
+      files.forEach((file) => {
+        fd.append('File[]', file);
+      });
+      const saveFile: AxiosResponse<ApiDataType> = await axios.post(
+        baseUrl + '/upload',
+      fd,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+       
+      )
+      return saveFile
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
+
+
+
+
+
 
 
 export const updateFriend = async (formData:IFriend): Promise<AxiosResponse<ApiDataType>> => {
@@ -72,3 +91,4 @@ export const deleteFriend = async (
       throw new Error(error)
     }
   }
+

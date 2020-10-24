@@ -13,7 +13,7 @@ const getFriends = async (req: Request, res: Response): Promise<void> => {
 
 const addFriend = async (req: Request, res: Response): Promise<void> => {
   try {
-    const body = req.body as Pick<IFriend, "name" | "gender"| "age" | "hobbies" | "music_genre" | "pets" | "images"| "status">;
+    const body = req.body as Pick<IFriend, "name" | "gender"| "age" | "hobbies" | "music_genre" | "pets" | "status">;
 
     const friend: IFriend = new Friend({
       name: body.name,
@@ -22,9 +22,11 @@ const addFriend = async (req: Request, res: Response): Promise<void> => {
       hobbies: body.hobbies,
       music_genre: body.music_genre,
       pets: body.pets,
-      images: body.images,
+      images: req.files,
       status: body.status,
     });
+
+    console.log(req.file);
 
     const newFriend: IFriend = await friend.save();
     const allFriends: IFriend[] = await Friend.find();

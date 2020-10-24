@@ -30,16 +30,11 @@ body {
   font-size: 1em;
 }
 
-.Card--text button {
-border: none;
-background-color: transparent;
-}
 
-.Card--button button {
-  background: #f5f6f7;
-  padding: 0.2rem 0.75rem;
-  border-radius: 20px;
-  cursor: pointer;
+.currentfriend-button {
+  border: none;
+  background-color: transparent;
+  margin-right: 1em;
 }
 
 

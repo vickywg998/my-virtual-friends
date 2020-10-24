@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
-import CurrentFriendList from "./CurrentFriendList";
+import CurrentFriendCard from "./CurrentFriendCard";
 
-import {
-  getFriends,
-  updateFriend,
-  deleteFriend,
-} from "../../../API";
+import { getFriends, updateFriend, deleteFriend } from "../../../API";
 
 import styled from "styled-components";
 
@@ -32,14 +28,17 @@ const AddFriendTitle = styled.h1`
 
 const CurrentFriendComponent: React.FC = () => {
   const [friends, setFriends] = useState<IFriend[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     fetchFriends();
   }, []);
 
   const fetchFriends = (): void => {
+    setIsLoading(true);
     getFriends()
       .then(({ data: { friends } }: IFriend[] | any) => setFriends(friends))
+      .then(() => setIsLoading(false))
       .catch((err: Error) => console.log(err));
   };
 
@@ -71,14 +70,20 @@ const CurrentFriendComponent: React.FC = () => {
       <AddFriendButton as="a" href="/add">
         Add More!
       </AddFriendButton>
-      {friends.map((friend: IFriend) => (
-        <CurrentFriendList
-          key={friend._id}
-          updateFriend={handleUpdateFriend}
-          deleteFriend={handleDeleteFriend}
-          friend={friend}
-        />
-      ))}
+      {isLoading ? (
+        <h4>Loading...Please wait :) </h4>
+      ) : (
+        <>
+          {friends.map((friend: IFriend) => (
+            <CurrentFriendCard
+              key={friend._id}
+              updateFriend={handleUpdateFriend}
+              deleteFriend={handleDeleteFriend}
+              friend={friend}
+            />
+          ))}
+        </>
+      )}
     </div>
   );
 };
