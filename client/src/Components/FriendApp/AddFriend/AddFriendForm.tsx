@@ -63,7 +63,7 @@ const AddFriendForm: React.FC<Props> = ({ saveFriend }) => {
 
   return (
     <>
-      <form className="Form" onSubmit={onSubmit}>
+      <form className="Form" onSubmit={onSubmit} encType="multipart/form-data">
         <input
           type="file"
           id="image"

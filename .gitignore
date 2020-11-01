@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 nodemon.json
+/.vscode
 
 # testing
 /coverage
