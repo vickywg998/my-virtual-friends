@@ -43,27 +43,33 @@ const AddFriendForm: React.FC<Props> = ({ saveFriend }) => {
 
     let image;
     if (friendImage.current?.files) {
-      image = friendImage.current?.files[0]
+      image = friendImage.current?.files[0];
     }
 
     // todo: get formData from <form> element on submit
     // ex. const data = new FormData(e.???)
     const fd = new FormData();
-    fd.append('image', image as Blob);
-    fd.append('name', formData.name || '');
-    fd.append('gender', formData.gender || '');
-    fd.append('age', '' + formData.age);
-    fd.append('hobbies', formData.hobbies || '');
-    fd.append('music_genre', formData.music_genre || '');
-    fd.append('pets', formData.pets || '');
+    fd.append("image", image as Blob);
+    fd.append("name", formData.name || "");
+    fd.append("gender", formData.gender || "");
+    fd.append("age", "" + formData.age);
+    fd.append("hobbies", formData.hobbies || "");
+    fd.append("music_genre", formData.music_genre || "");
+    fd.append("pets", formData.pets || "");
 
     saveFriend(fd);
-  }
+    console.log(fd)
+  };
 
   return (
     <>
       <form className="Form" onSubmit={onSubmit}>
-        <input type="file" id="image" ref={friendImage} onChange={handleFormOnChange}/>
+        <input
+          type="file"
+          id="image"
+          ref={friendImage}
+          onChange={handleFormOnChange}
+        />
         <div>
           <div>
             <label htmlFor="name">Name</label>
@@ -75,8 +81,7 @@ const AddFriendForm: React.FC<Props> = ({ saveFriend }) => {
 
             <select onChange={handleFormOnChange} id="gender">
               <option disabled defaultValue="true" value="">
-                {" "}
-                -- select an option --{" "}
+                -- select an option --
               </option>
               <option value="male">Male</option>
               <option value="female">Female</option>
@@ -98,8 +103,7 @@ const AddFriendForm: React.FC<Props> = ({ saveFriend }) => {
             <label htmlFor="hobbies">Hobbies</label>
             <select onChange={handleFormOnChange} id="hobbies">
               <option disabled defaultValue="true" value="">
-                {" "}
-                -- select an option --{" "}
+                -- select an option --
               </option>
               <optgroup label="Active & Outdoor Hobbies">
                 <option value="hiking">hiking</option>

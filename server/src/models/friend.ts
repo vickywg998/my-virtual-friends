@@ -13,23 +13,24 @@ const friendSchema: Schema = new Schema(
     },
     age: {
       type: Number,
-      required: true,
+      required: false,
     },
     hobbies: {
       type: String,
-      required: true,
+      required: false,
     },
     music_genre: {
       type: String,
-      required: true,
+      required: false,
     },
     pets: {
       type: String,
       required: false,
     },
-    images: {
-      type: Object,
-      required: false,
+    image: {
+      type: Object
+      // data: Buffer, 
+      // contentType: String 
     },
 
   },

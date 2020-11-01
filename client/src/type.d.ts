@@ -1,6 +1,7 @@
 interface IFriend {
   _id: string;
   name: string;
+  image: Blob;
   gender: string;
   age: number;
   hobbies: string;

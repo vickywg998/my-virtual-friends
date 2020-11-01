@@ -3,9 +3,8 @@ import express, { Application, Request, Response } from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import bodyParser from "body-parser";
-import path from "path";
 // file upload dependency
-import {fileRoutes} from "./routes/fileRoutes";
+// import {fileRoutes} from "./routes/fileRoutes";
 
 //routes
 import friendRoutes from "./routes/friendsRoutes";
@@ -32,7 +31,7 @@ router.use(cors());
 router.use(express.static('public'));
 
 router.use(friendRoutes);
-router.use("/images", fileRoutes);
+// router.use("/images", fileRoutes);
 
 
 // console.log(path.join(__dirname, "/../uploads/"))

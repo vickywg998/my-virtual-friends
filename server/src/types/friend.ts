@@ -8,5 +8,5 @@ export interface IFriend extends Document {
   music_genre: string;
   pets: string;
   status: boolean;
-  images: object;
+  image: object;
 }

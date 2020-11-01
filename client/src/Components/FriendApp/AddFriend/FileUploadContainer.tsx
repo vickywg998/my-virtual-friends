@@ -11,7 +11,6 @@ interface IImageUpload {
 //   uploadFile: (e: React.MouseEvent<HTMLElement>, files: IImageUpload | any) => void;
 // };
 
-
 const FileUploadContainer: React.FC<IImageUpload> = ({ files, onDrop }) => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: "image/jpeg, image/png, image/jpg",
@@ -44,13 +43,11 @@ const FileUploadContainer: React.FC<IImageUpload> = ({ files, onDrop }) => {
           </h3>
         ) : (
           <h3 style={{ border: "solid #ffffff", width: "200px" }}>
-            Drag 'n' drop some files here, or click to select files
+            Drag 'n' drop some files here, or click to select files to Preview
           </h3>
         )}
       </div>
       <div>{images}</div>
-      {/* <button onClick={() => uploadFile()}>Upload</button> */}
-      <button>Upload</button>
     </div>
   );
 };

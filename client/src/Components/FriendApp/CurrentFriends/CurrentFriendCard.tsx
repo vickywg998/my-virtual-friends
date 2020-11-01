@@ -55,6 +55,7 @@ const Friend: React.FC<Props> = ({ friend, updateFriend, deleteFriend }) => {
       {!editing ? (
         <div className="Card--text">
           <h1>name: {friend.name}</h1>
+          <h1>image: {friend.image}</h1>
           <h1>gender: {friend.gender}</h1>
           <h1>age: {friend.age}</h1>
           <h1>hobbies: {friend.hobbies}</h1>
