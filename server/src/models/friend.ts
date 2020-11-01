@@ -28,7 +28,7 @@ const friendSchema: Schema = new Schema(
       required: false,
     },
     image: {
-      type: Object
+      type: Array
       // data: Buffer, 
       // contentType: String 
     },

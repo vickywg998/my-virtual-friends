@@ -41,7 +41,7 @@ const upload = multer({ storage: storage, fileFilter: fileFilter });
 const addFriend = async (req: Request, res: Response): Promise<void> => {
   try {
     const body = req.body as Pick<IFriend, "name" | "gender"| "age" | "hobbies" | "music_genre" | "pets" | "image" | "status">;
-
+  
     const friend: IFriend = new Friend({
       name: body.name,
       gender: body.gender,
@@ -49,10 +49,10 @@ const addFriend = async (req: Request, res: Response): Promise<void> => {
       hobbies: body.hobbies,
       music_genre: body.music_genre,
       pets: body.pets,
-      image: req.files,
+      image: req.file,
       status: body.status,
     });
-    console.log(req.files);
+    console.log(req.file);
 
     const newFriend: IFriend = await friend.save();
     const allFriends: IFriend[] = await Friend.find();
@@ -61,7 +61,7 @@ const addFriend = async (req: Request, res: Response): Promise<void> => {
     .json({
       message: "friend added",
       friend: newFriend,
-      friends: allFriends,
+      // friends: allFriends,
     });
   } catch (error) {
     throw error;
