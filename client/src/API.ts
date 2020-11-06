@@ -32,30 +32,6 @@ export const addFriend = async (
     }
   }
 
-  // export const uploadFile = async (files: File[]) : Promise<AxiosResponse<ApiDataType>> => {
-  //   try {
-  //     const fd = new FormData();
-
-  //     files.forEach((file) => {
-  //       fd.append('File[]', file);
-  //     });
-  //     const saveFile: AxiosResponse<ApiDataType> = await axios.post(
-  //       baseUrl + '/upload',
-  //     fd,
-  //     {
-  //       headers: {
-  //         "Content-Type": "multipart/form-data",
-  //       },
-  //     }
-       
-  //     )
-  //     return saveFile
-  //   } catch (error) {
-  //     throw new Error(error)
-  //   }
-  // }
-
-
 export const updateFriend = async (formData:IFriend): Promise<AxiosResponse<ApiDataType>> => {
   try {
     const friendUpdate: Pick<IFriend,  "name" | "gender"| "age" | "hobbies" | "music_genre" | "pets" |  "status"> = {

@@ -32,6 +32,13 @@ const UpdateFriendButton = styled.button`
   margin-right: 1rem;
 `;
 
+const CurrentFriendImg = styled.img`
+ width: 200px;
+ height: 200px;
+`;
+
+const imagePath = "http://localhost:8080/uploads/";
+
 const Friend: React.FC<Props> = ({ friend, updateFriend, deleteFriend }) => {
   const [editData, setEditData] = useState<IFriend>({ ...friend });
   const [editing, setEditing] = useState(false);
@@ -55,7 +62,7 @@ const Friend: React.FC<Props> = ({ friend, updateFriend, deleteFriend }) => {
       {!editing ? (
         <div className="Card--text">
           <h1>name: {friend.name}</h1>
-          {/* <h1>image: {friend.image}</h1> */}
+          <CurrentFriendImg src={imagePath + friend.imageName}/>
           <h1>gender: {friend.gender}</h1>
           <h1>age: {friend.age}</h1>
           <h1>hobbies: {friend.hobbies}</h1>

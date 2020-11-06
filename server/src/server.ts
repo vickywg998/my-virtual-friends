@@ -3,8 +3,7 @@ import express, { Application, Request, Response } from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import bodyParser from "body-parser";
-// file upload dependency
-// import {fileRoutes} from "./routes/fileRoutes";
+import path from "path";
 
 //routes
 import friendRoutes from "./routes/friendsRoutes";
@@ -20,18 +19,15 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 router.use(cors());
-// router.use((req, res, next) => {
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, Content-Type, X-Requested-With,Accept, Authorization"
-//   );
-//  });
 
  // for parsing multipart/form-data
 router.use(express.static('public'));
+// router.use('/uploads', express.static('/../server/uploads'));
+router.use('/uploads', express.static(path.join(__dirname, '/../public/uploads')));
+
+console.log("path" + path.join(__dirname, '/../public/uploads'))
 
 router.use(friendRoutes);
-// router.use("/images", fileRoutes);
 
 
 // console.log(path.join(__dirname, "/../uploads/"))

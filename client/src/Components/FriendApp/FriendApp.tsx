@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AddFriendForm from "./AddFriend/AddFriendForm";
 import FileUploadContainer from "./AddFriend/FilePreviewContainer";
-import { addFriend, uploadFile } from "../../API";
+import { addFriend } from "../../API";
 
 const FriendApp: React.FC = () => {
   const [friends, setFriends] = useState<IFriend[]>([]);
